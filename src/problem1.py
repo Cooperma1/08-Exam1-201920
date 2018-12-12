@@ -3,13 +3,13 @@ Exam 1, problem 1.
 
 Authors: David Mutchler, Vibha Alangar, Matt Boutell, Dave Fisher,
          Mark Hays, Amanda Stouder, Aaron Wilkin, their colleagues,
-         and PUT_YOUR_NAME_HERE.
-"""  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
+         and Miguel Cooper.
+"""  # done: 1. PUT YOUR NAME IN THE ABOVE LINE.
 
 import rosegraphics as rg
 
 # -----------------------------------------------------------------------------
-# TODO: 2. Right-click on the  src  folder and
+# done: 2. Right-click on the  src  folder and
 #              Mark Directory as ... Sources Root,
 #          if you have not already done so.
 # -----------------------------------------------------------------------------
@@ -37,7 +37,7 @@ def run_test_problem1():
     square = rg.Square(rg.Point(125, 50), 60)
     square.fill_color = 'red'
     square.outline_color = 'blue'
-    square.outline_thickness = 3
+    square.outline_thickness = 6
 
     problem1(square, 6, window)
     window.continue_on_mouse_click()
@@ -46,7 +46,7 @@ def run_test_problem1():
     square = rg.Square(rg.Point(250, 100), 100)
     square.fill_color = 'cyan'
     square.outline_color = 'magenta'
-    square.outline_thickness = 6
+    square.outline_thickness = 3
 
     problem1(square, 3, window)
     window.close_on_mouse_click()
@@ -101,9 +101,24 @@ def problem1(square, thickness, window):
       :type window:    rg.RoseWindow
     """
     # -------------------------------------------------------------------------
-    # TODO: 3. Implement and test this function.  SEE THE PICTURES in the PDF!
+    # done: 3. Implement and test this function.  SEE THE PICTURES in the PDF!
     #          Tests have been written for you (above).
     # -------------------------------------------------------------------------
+    square.attach_to(window)
+    point = rg.Point(square.center.x, square.center.y + square.length_of_each_side)
+
+    circle = rg.Circle(point, square.length_of_each_side / 2)
+    circle.outline_thickness = thickness
+    circle.fill_color = square.fill_color
+    circle.attach_to(window)
+
+    point_a = rg.Point(square.center.x - (square.length_of_each_side / 2), square.center.y)
+    line = rg.Line(circle.center, point_a)
+    line.color = square.outline_color
+    line.thickness = thickness
+    line.attach_to(window)
+
+    window.render()
 
 
 # -----------------------------------------------------------------------------
